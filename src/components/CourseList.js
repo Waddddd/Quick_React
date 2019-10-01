@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Button } from 'rbx';
-import {terms} from './Course/times';
-import Course from "./Course/Course";
+import { terms } from './Course';
+import Course from './Course';
 
 const buttonColor = selected => (
     selected ? 'success' : null

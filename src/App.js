@@ -1,12 +1,12 @@
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import React, {useState, useEffect} from 'react';
 import 'rbx/index.css';
 import { Button, Container, Title, Message } from 'rbx';
-import firebase from 'firebase/app';
-import 'firebase/database';
 import CourseList from './components/CourseList';
-import {timeParts} from './components/Course/times'
+import { addScheduleTimes } from './components/Course'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCFSLctaWmDbOn2KL4EVEehnCQzaL4pMc0",
@@ -30,16 +30,6 @@ const uiConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database().ref();
-
-const addCourseTimes = course => ({
-  ...course,
-  ...timeParts(course.meets)
-});
-
-const addScheduleTimes = schedule => ({
-  title: schedule.title,
-  courses: Object.values(schedule.courses).map(addCourseTimes)
-});
 
 const Banner = ({ user, title }) => (
   <React.Fragment>
